@@ -1,34 +1,28 @@
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
-import { LoginComponent } from './features/login/login.component';
-import { RegisterComponent } from './features/register/register.component';
 import { HomeComponent } from './features/home/home.component';
-import { CartComponent } from './features/cart/cart.component';
-import { ProductsComponent } from './features/products/products.component';
-import { BrandsComponent } from './features/brands/brands.component';
-import { CategoriesComponent } from './features/categories/categories.component';
-import { CheckoutComponent } from './features/checkout/checkout.component';
-import { NotfoundComponent } from './shared/notfound/notfound.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     {
         path: '', component: AuthLayoutComponent,
         children: [
-            { path: 'login', component: LoginComponent, title: 'Login' },
-            { path: 'register', component: RegisterComponent, title: 'Register' },
+            { path: 'login', loadComponent: () => import('./features/login/login.component').then((c) => c.LoginComponent), title: 'Login' },
+            { path: 'register', loadChildren: () => import('./features/register/register.component').then((c) => c.RegisterComponent), title: 'Register' },
         ]
     },
     {
         path: '', component: BlankLayoutComponent, children: [
             { path: 'home', component: HomeComponent, title: 'home' },
-            { path: 'cart', component: CartComponent, title: 'cart' },
-            { path: 'products', component: ProductsComponent, title: 'products' },
-            { path: 'brands', component: BrandsComponent, title: 'brands' },
-            { path: 'categories', component: CategoriesComponent, title: 'categories' },
-            { path: 'checkout', component: CheckoutComponent, title: 'checkout' },
-            { path: '**', component: NotfoundComponent , title:'NotFound' }
+            { path: 'cart', loadComponent: () => import('./features/cart/cart.component').then((c) => c.CartComponent), title: 'cart' },
+            { path: 'products', loadComponent: () => import('./features/products/products.component').then((c) => c.ProductsComponent), title: 'products' },
+            { path: 'brands', loadComponent: () => import('./features/brands/brands.component').then((c) => c.BrandsComponent), title: 'brands' },
+            { path: 'categories', loadComponent: () => import('./features/categories/categories.component').then((c) => c.CategoriesComponent), title: 'categories' },
+            { path: 'categories/:name/:_id', loadComponent: () => import('./features/subcategory/subcategory.component').then((c) => c.SubcategoryComponent), title: 'subcategories' },
+            { path: 'checkout', loadComponent: () => import('./features/checkout/checkout.component').then((c) => c.CheckoutComponent), title: 'checkout' },
+            { path: 'wishlist', loadComponent: () => import('./features/wishlist/wishlist.component').then((c) => c.WishlistComponent), title: 'wishlist' },
+            { path: '**', loadComponent: () => import('./shared/components/notfound/notfound.component').then((c) => c.NotfoundComponent), title: 'NotFound' }
         ]
     },
 ];

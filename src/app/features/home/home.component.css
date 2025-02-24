@@ -1,0 +1,8 @@
+.z-20 , .z-30{
+    z-index: 1;
+}
+
+.min-h-90{
+    height: 90vh !important;
+}
+

@@ -1,0 +1,20 @@
+export interface productI {
+    sold: number,
+    images: any,
+    subcategory: any,
+    ratingsQuantity: number,
+    _id: string,
+    title: string,
+    slug: string,
+    description: string,
+    quantity: number,
+    price: number,
+    availableColors: any,
+    imageCover: string,
+    category: any,
+    brand: any,
+    ratingsAverage: number,
+    createdAt: Date,
+    updatedAt: Date,
+    id: string
+} 
