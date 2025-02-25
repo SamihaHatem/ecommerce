@@ -18,7 +18,7 @@ export const routes: Routes = [
             { path: 'cart', loadComponent: () => import('./features/cart/cart.component').then((c) => c.CartComponent), title: 'cart' },
             { path: 'products', loadComponent: () => import('./features/products/products.component').then((c) => c.ProductsComponent), title: 'products' },
             { path: 'brands', loadComponent: () => import('./features/brands/brands.component').then((c) => c.BrandsComponent), title: 'brands' },
-            { path: 'categories', loadComponent: () => import('./features/categories/categories.component').then((c) => c.CategoriesComponent), title: 'categories' },
+            { path: 'catrgories', loadComponent: () => import('./features/categories/categories.component').then((c) => c.CategoriesComponent), title: 'categories' },
             { path: 'categories/:name/:_id', loadComponent: () => import('./features/subcategory/subcategory.component').then((c) => c.SubcategoryComponent), title: 'subcategories' },
             { path: 'checkout', loadComponent: () => import('./features/checkout/checkout.component').then((c) => c.CheckoutComponent), title: 'checkout' },
             { path: 'wishlist', loadComponent: () => import('./features/wishlist/wishlist.component').then((c) => c.WishlistComponent), title: 'wishlist' },

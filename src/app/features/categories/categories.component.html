@@ -1,1 +1,33 @@
-<p>categories works!</p>
+<div>
+    <div class="w-3/4 mx-auto">
+        <div class="my-3">
+            <p class="text-xl font-semibold text-gray-900"><i class="fa-solid fa-shop text-emerald-800"></i>
+                Categories</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+            @for(cat of categoriesList;track cat._id){
+            <div class="col-span-1">
+                <div>
+                    <div class="group border border-slate-300 text-left">
+                        <div class="overflow-hidden cursor-pointer"
+                            routerLink="/categories/{{cat.name}}/{{cat._id}}">
+                            <img class="card-img-top w-full h-[250px] group-hover:scale-110 transition-all duration-200"
+                                [src]="cat.image" alt="">
+                        </div>
+                        <div class=" p-3">
+                            <h4 class="text-gray-900 text-lg font-medium">{{cat.name}}</h4>
+                            <button class="card-text bg-green-950 text-white px-2 py-1" routerLink="/products">Shop
+                                Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+
+            @if(categoriesList.length == 0){
+            <p class="text-gray-600"><i class="fa-solid fa-ban"></i> No subcategories exist</p>
+            }
+        </div>
+    </div>
+</div>

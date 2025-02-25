@@ -20,4 +20,8 @@ export class EcommerceService {
   getAllProducts() {
     return this.http.get(environment.basurl + '/products')
   }
+
+  getAllBrands() {
+    return this.http.get(environment.basurl + '/brands')
+  }
 }

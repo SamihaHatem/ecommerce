@@ -1,7 +1,10 @@
+import { categoryI } from "./category.interface";
+import { subCategoryI } from "./subcategory.interface";
+
 export interface productI {
     sold: number,
     images: any,
-    subcategory: any,
+    subcategory: subCategoryI[],
     ratingsQuantity: number,
     _id: string,
     title: string,
@@ -11,7 +14,7 @@ export interface productI {
     price: number,
     availableColors: any,
     imageCover: string,
-    category: any,
+    category: categoryI,
     brand: any,
     ratingsAverage: number,
     createdAt: Date,

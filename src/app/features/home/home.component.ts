@@ -46,7 +46,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   getAllCategories() {
     this.getAllCategoriesSubscription = this.ecommerceService.getAllCategories().subscribe((response: any) => {
       this.categoriesList = response.data;
-      console.log(this.categoriesList)
     }, (err: any) => {
       console.log(err)
     })
@@ -56,10 +55,55 @@ export class HomeComponent implements OnInit, OnDestroy {
   productsList: productI[] = []
   getProducts() {
     this.getAllProductsSubscription = this.ecommerceService.getAllProducts().subscribe((response: any) => {
-      console.log(response)
       this.productsList = response.data
     }, (err: any) => {
       console.log(err)
+    })
+  }
+
+  isModalOpen: boolean = false;
+  selectedProduct!: productI
+  productOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<', '>'],
+    dotsData: true,
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 4
+      },
+      940: {
+        items: 5
+      }
+    },
+    nav: true
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
+  openModal(product: productI) {
+    this.selectedProduct = product;
+    console.log(product)
+    this.isModalOpen = true;
+  }
+
+  getAllBrands() {
+    this.ecommerceService.getAllBrands().subscribe((response: any) => {
+      
+    }, (err: any) => {
+
     })
   }
 

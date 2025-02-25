@@ -1,1 +1,21 @@
-<p>brands works!</p>
+<div>
+
+    <!-- Products -->
+    <div class="w-3/4 mx-auto">
+        <div class="my-3">
+            <p class="text-xl font-semibold text-gray-900">
+                <i class="fa-solid fa-store text-pink-600"></i>
+                Brands
+            </p>
+        </div>
+
+        <div class="mx-auto">
+            <div class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
+                @for(brand of brandsList;track brand){
+                <img [src]="brand.image" [alt]="brand.name" class="h-[150px]">
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
