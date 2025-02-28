@@ -34,7 +34,7 @@ export class CheckoutComponent implements OnInit {
       console.log("onlinePayment: ", response)
       this.isLoading = false;
       if (response.status == 'success') {
-        open(response.session.url)
+        open(response.session.url , '_self')
       }
     }, (err: any) => {
       console.log(err)
