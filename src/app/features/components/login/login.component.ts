@@ -18,6 +18,7 @@ export class LoginComponent {
   private readonly router = inject(Router)
   isLoading: boolean = false
   errMsg: string = ''
+  private readonly myPlatformID = inject(PLATFORM_ID)
   constructor() { }
 
   onMobileChange(event: any) {
@@ -31,8 +32,7 @@ export class LoginComponent {
     this.authServices.login(form.value).subscribe((response: any) => {
       console.log(response)
       if (response.message == 'success') {
-        const myPlatformID = inject(PLATFORM_ID)
-        if (isPlatformBrowser(myPlatformID)) {
+        if (isPlatformBrowser(this.myPlatformID)) {
           localStorage.setItem('eUser', JSON.stringify(response.user))
           localStorage.setItem('eToken', response.token)
         }

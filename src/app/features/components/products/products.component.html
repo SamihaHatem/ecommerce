@@ -147,7 +147,7 @@
                     </div>
 
                     <div class="my-2">
-                        <button
+                        <button (click)="addToCart(selectedProduct._id)"
                             class="w-full text-center p-2 uppercase bg-green-950 text-white  hover:bg-green-800 transition-all duration-200">
                             <i class="fa-solid fa-basket-shopping mx-2"></i> Add to bag</button>
                     </div>
@@ -157,9 +157,20 @@
                             class="w-full text-center p-2 uppercase bg-gray-200 text-black hover:bg-red-700 hover:text-white transition-all duration-200">
                             <i class="fa-regular fa-heart mx-2"></i> wishlist</button>
                     </div>
+
+
+                    <div class="my-2">
+                        <button routerLink="/product/details/{{selectedProduct._id}}"
+                            class="w-full text-center p-2 uppercase bg-gray-200 text-black hover:bg-gray-400 hover:text-white transition-all duration-200">
+                            <i class="fa-solid fa-circle-info mx-2"></i> More</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    }
+
+    @if(isLoading){
+    <app-loading></app-loading>
     }
 </div>

@@ -4,16 +4,18 @@ import { Subscription } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { categoryI } from '../../../shared/interfaces/category.interface';
 import { EcommerceService } from '../../../shared/services/ecommerce/ecommerce.service';
+import { LoadingComponent } from "../../../shared/components/loading/loading.component";
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, LoadingComponent],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css'
 })
 export class CategoriesComponent implements OnInit, OnDestroy {
 
+  isLoading:boolean = true
   constructor(private ecommerceService: EcommerceService) { }
 
 
@@ -44,11 +46,16 @@ export class CategoriesComponent implements OnInit, OnDestroy {
   }
   getAllCategoriesSubscription: Subscription = new Subscription()
   getAllCategories() {
+    this.isLoading = true
+
     this.getAllCategoriesSubscription = this.ecommerceService.getAllCategories().subscribe((response: any) => {
       this.categoriesList = response.data;
       console.log(this.categoriesList)
+      this.isLoading = false
     }, (err: any) => {
       console.log(err)
+      this.isLoading = false
+
     })
   }
 

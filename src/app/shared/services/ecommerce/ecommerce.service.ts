@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EcommerceService {
 
+  token = localStorage.getItem('eToken')!
   constructor(private http: HttpClient) { }
 
   getAllCategories() {
@@ -21,7 +22,13 @@ export class EcommerceService {
     return this.http.get(environment.basurl + '/products')
   }
 
+  getProductByID(_id: string) {
+    return this.http.get(`${environment.basurl}/products/${_id}`)
+  }
+
   getAllBrands() {
     return this.http.get(environment.basurl + '/brands')
   }
+
+
 }

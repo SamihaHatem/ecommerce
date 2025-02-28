@@ -1,0 +1,86 @@
+@if(selectedProduct){
+<div class="relative p w-full dark:bg-gray-700 mx-4 md:mx-0">
+
+    <div class="grid w-10/12 mx-auto p-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+        <div class="col-span-1">
+
+            <owl-carousel-o [options]="productOptions">
+                <ng-container>
+                    <ng-template carouselSlide>
+                        <img [src]="selectedProduct.imageCover" [alt]="selectedProduct.title">
+                    </ng-template>
+                </ng-container>
+                @for(img of selectedProduct.images; track img){
+                <ng-container>
+                    <ng-template carouselSlide>
+                        <img [src]="img" [alt]="selectedProduct.title">
+                    </ng-template>
+                </ng-container>
+                }
+            </owl-carousel-o>
+        </div>
+
+        <div class="col-span-1 p-2">
+            <div>
+                <p>{{selectedProduct.title}}</p>
+                <p class="text-gray-500"> {{selectedProduct.description}}</p>
+            </div>
+
+            <div class="my-2">
+                <span class="h-full border border-gray-300 px-2 py-1"> <i class="fa-solid fa-star text-yellow-600"></i>
+                    {{selectedProduct.ratingsAverage}}</span>
+                <span class="h-full border border-gray-300 px-2 py-1">{{selectedProduct.ratingsQuantity}}
+                    Ratings</span>
+            </div>
+
+            <div class="my-3">
+                <p> price: {{selectedProduct.price}} EGP</p>
+                <p> sold: {{selectedProduct.sold}}</p>
+                <p> available: {{selectedProduct.quantity}}</p>
+            </div>
+            @if(selectedProduct.availableColors?.length > 0){
+            <div>
+                More Colors:
+                <div class="grid grid-cols-5">
+                    @for(color of selectedProduct.availableColors ; track color){
+                    <div class="w-4 h-4">
+                        {{color}}
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+
+            <div>
+                @if(selectedProduct.category){
+                <span class="text-gray-500 text-sm mx-2"><i class="fa-solid fa-tags text-xs"></i>
+                    {{selectedProduct.category.name}}</span>
+                }
+
+                @if(selectedProduct.subcategory && selectedProduct.subcategory.length > 0){
+                @for(cat of selectedProduct.subcategory ; track cat){
+                <span class="text-gray-500 text-sm mx-2"><i class="fa-solid fa-tags text-xs"></i>
+                    {{cat.name}}</span>
+                }
+                }
+
+            </div>
+
+            <div class="my-2">
+                <button (click)="addToCart(selectedProduct._id)"
+                    class="w-full text-center p-2 uppercase bg-green-950 text-white  hover:bg-green-800 transition-all duration-200">
+                    <i class="fa-solid fa-basket-shopping mx-2"></i> Add to bag</button>
+            </div>
+
+            <div class="my-2">
+                <button
+                    class="w-full text-center p-2 uppercase bg-gray-200 text-black hover:bg-red-700 hover:text-white transition-all duration-200">
+                    <i class="fa-regular fa-heart mx-2"></i> wishlist</button>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+}

@@ -19,11 +19,13 @@ export const routes: Routes = [
             { path: 'home', component: HomeComponent, title: 'home' },
             { path: 'cart', loadComponent: () => import('./features/components/cart/cart.component').then((c) => c.CartComponent), title: 'cart' },
             { path: 'products', loadComponent: () => import('./features/components/products/products.component').then((c) => c.ProductsComponent), title: 'products' },
+            { path: 'product/details/:_id', loadComponent: () => import('./features/components/product-details/product-details.component').then((c) => c.ProductDetailsComponent), title: 'Details' },
             { path: 'brands', loadComponent: () => import('./features/components/brands/brands.component').then((c) => c.BrandsComponent), title: 'brands' },
             { path: 'catrgories', loadComponent: () => import('./features/components/categories/categories.component').then((c) => c.CategoriesComponent), title: 'categories' },
             { path: 'categories/:name/:_id', loadComponent: () => import('./features/components/subcategory/subcategory.component').then((c) => c.SubcategoryComponent), title: 'subcategories' },
-            { path: 'checkout', loadComponent: () => import('./features/components/checkout/checkout.component').then((c) => c.CheckoutComponent), title: 'checkout' },
+            { path: 'checkout/:cartID', loadComponent: () => import('./features/components/checkout/checkout.component').then((c) => c.CheckoutComponent), title: 'checkout' },
             { path: 'wishlist', loadComponent: () => import('./features/components/wishlist/wishlist.component').then((c) => c.WishlistComponent), title: 'wishlist' },
+            { path: 'allorders', loadComponent: () => import('./features/components/orders/orders.component').then((c) => c.OrdersComponent), title: 'orders' },
             { path: '**', loadComponent: () => import('./shared/components/notfound/notfound.component').then((c) => c.NotfoundComponent), title: 'NotFound' }
         ]
     },

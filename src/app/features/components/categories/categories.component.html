@@ -10,8 +10,7 @@
             <div class="col-span-1">
                 <div>
                     <div class="group border border-slate-300 text-left">
-                        <div class="overflow-hidden cursor-pointer"
-                            routerLink="/categories/{{cat.name}}/{{cat._id}}">
+                        <div class="overflow-hidden cursor-pointer" routerLink="/categories/{{cat.name}}/{{cat._id}}">
                             <img class="card-img-top w-full h-[250px] group-hover:scale-110 transition-all duration-200"
                                 [src]="cat.image" alt="">
                         </div>
@@ -24,10 +23,16 @@
                 </div>
             </div>
             }
-
-            @if(categoriesList.length == 0){
+            @empty {
+            @if(!isLoading)
+            {
             <p class="text-gray-600"><i class="fa-solid fa-ban"></i> No subcategories exist</p>
+            }
             }
         </div>
     </div>
+
+    @if(isLoading){
+    <app-loading></app-loading>
+    }
 </div>

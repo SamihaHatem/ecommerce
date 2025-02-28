@@ -47,5 +47,4 @@ export class AuthService {
     return this.http.get(environment.basurl + '/auth/verifyToken')
   }
 
-
 }

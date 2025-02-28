@@ -5,17 +5,21 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { productI } from '../../../shared/interfaces/product.interfcae';
+import { brandsI } from '../../../shared/interfaces/brands.interface';
+import { CartService } from '../../../shared/services/cart/cart.service';
+import Swal from 'sweetalert2';
+import { LoadingComponent } from "../../../shared/components/loading/loading.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselModule, RouterLink],
+  imports: [CarouselModule, RouterLink, LoadingComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  constructor(private ecommerceService: EcommerceService) { }
+  constructor(private ecommerceService: EcommerceService, private cartServices: CartService) { }
 
   categoriesList: categoryI[] = []
   categoriesOptions: OwlOptions = {
@@ -61,6 +65,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
   }
 
+  brandsList: brandsI[] = []
+  getAllBrandsSub: Subscription = new Subscription()
+  getAllBrands() {
+    this.getAllBrandsSub = this.ecommerceService.getAllBrands().subscribe((response: any) => {
+      this.brandsList = response.data;
+    }, (err: any) => {
+      console.log(err)
+    })
+  }
+
   isModalOpen: boolean = false;
   selectedProduct!: productI
   productOptions: OwlOptions = {
@@ -99,21 +113,36 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.isModalOpen = true;
   }
 
-  getAllBrands() {
-    this.ecommerceService.getAllBrands().subscribe((response: any) => {
-      
-    }, (err: any) => {
-
-    })
-  }
-
   ngOnInit(): void {
     this.getAllCategories();
     this.getProducts();
+    this.getAllBrands();
+  }
+
+  isLoading:boolean = false;
+  addToCart(_id: string) {
+    this.isLoading = true;
+
+    this.cartServices.addProductToCart(_id).subscribe((response: any) => {
+      console.log(response)
+      this.isLoading = false;
+
+      Swal.fire({
+        title:'Done',
+        icon:'success'
+      }).then(()=>{
+        this.isModalOpen = false
+      })
+    }, (err: any) => {
+      console.log(err)
+      this.isLoading = false;
+
+    })
   }
 
   ngOnDestroy(): void {
     this.getAllCategoriesSubscription.unsubscribe();
     this.getAllProductsSubscription.unsubscribe();
+    this.getAllBrandsSub.unsubscribe();
   }
 }

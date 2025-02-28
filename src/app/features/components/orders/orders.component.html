@@ -1,0 +1,64 @@
+<div class="w-3/4 mx-auto">
+    <div class="my-3">
+        <p class="text-xl font-semibold text-gray-900"><i class="fa-solid fa-shop text-emerald-800"></i>
+            Orders</p>
+    </div>
+
+    <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+
+                    <th scope="col" class="px-6 py-3">
+                        Order ID
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Status
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Price
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(product of ordersList;track product){
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{product.id}}
+                    </th>
+
+                    <td class="px-6 py-4">
+                        @if(product.isDelivered){
+                        <span class="mx-2"> [Delivered] </span>
+                        }
+                        @else {
+                        <span class="mx-2"> [on way] </span>
+
+                        }
+
+                        @if(product.isPaid){
+                        <span class="mx-2"> [Paid]</span>
+
+                        }
+                        @else {
+                        <span class="mx-2"> [pending payment] </span>
+
+                        }
+
+
+                    </td>
+                    <td class="px-6 py-4">
+                        {{product.totalOrderPrice}}
+                    </td>
+                </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+    @if(isLoading){
+    <app-loading></app-loading>
+    }
+</div>

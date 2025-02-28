@@ -1,1 +1,91 @@
-<p>checkout works!</p>
+<div class="relative my-6">
+    <div class="w-3/4 mx-auto">
+        <div class="my-3">
+            <p class="text-xl font-semibold text-gray-900">
+                <i class="fa-solid fa-house text-green-900"></i>
+                Shipping Deatils
+            </p>
+        </div>
+
+        <form class=" mx-auto my-10" #addressForm="ngForm">
+            <!------ Details ------>
+            <div class="relative z-0 w-full mb-8 group">
+                <input type="text" name="details" id="details" ngModel #details="ngModel"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    placeholder=" " required />
+                <label for="details"
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Your
+                    address</label>
+
+                @if(details.touched && details.invalid){
+                <div class="text-red-900 text-center text-xs font-semibold">
+                    @if(details.errors && details.errors['required']){
+                    <p class="m-0">Please enter your Address</p>
+                    }
+                </div>
+                }
+            </div>
+
+            <!------ Mobile Number ----->
+            <div class="relative z-0 w-full mb-8 group">
+                <input type="text" name="phone" id="phone" (input)="onMobileChange($event)" ngModel #phone="ngModel"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    placeholder=" " required pattern="^(010|011|012|015)[0-9]{8}$" minlength="11" maxlength="11" />
+                <label for="phone"
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Mobile
+                    Number</label>
+
+                @if(phone.touched && phone.invalid){
+                <div class="text-red-900 text-center text-xs font-semibold">
+                    @if(phone.errors && phone.errors['required']){
+                    <p class="m-0">Please enter your mobile number</p>
+                    }
+
+                    @if(phone.errors && phone.errors['pattern']){
+                    <p class="m-0">Please enter valid mobile number (e.g., 01123456789)</p>
+                    }
+                </div>
+                }
+            </div>
+
+            <!------ city ----->
+            <div class="relative z-0 w-full mb-8 group">
+                <input type="text" name="city" id="city" ngModel #city="ngModel"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    placeholder=" " required />
+                <label for="city"
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">City</label>
+
+
+                @if(city.touched && city.invalid){
+                <div class="text-red-900 text-center text-xs font-semibold">
+                    @if(city.errors && city.errors['required']){
+                    <p class="m-0">Please enter your City</p>
+                    }
+                </div>
+                }
+            </div>
+
+            <div class="text-center">
+                <button (click)="cashPayment(addressForm)" type="submit" [disabled]="addressForm.invalid" class="mx-5 text-white bg-green-700 disabled:opacity-50 hover:bg-green-800 focus:ring-4 focus:outline-none
+                focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600
+                 dark:hover:bg-green-700 dark:focus:ring-green-800"><i class="fa-solid fa-money-bills mx-1"></i> Cash
+                    Payment </button>
+
+
+                <button (click)="onlinePayment(addressForm)" type="submit" [disabled]="addressForm.invalid" class="mx-5 text-white bg-green-700 disabled:opacity-50 hover:bg-green-800 focus:ring-4 focus:outline-none
+                  focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600
+                   dark:hover:bg-green-700 dark:focus:ring-green-800"><i class="fa-brands fa-cc-visa mx-1"></i> Online
+                    payment </button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+    @if(isLoading){
+    <app-loading></app-loading>
+    }
+
+</div>

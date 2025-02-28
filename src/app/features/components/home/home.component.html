@@ -130,14 +130,29 @@
                 </div>
             </div>
             }
+
         </div>
+
+        <p class="text-center cursor-pointer text-sky-950 my-3 font-semibold" routerLink="/products">More...</p>
+
     </div>
 </div>
 
 <!-- Brands -->
- <div class="py-5">
-    
- </div>
+<div class="py-10">
+    <div class="text-center mb-4">
+        <p class="text-xl font-medium">Brands</p>
+        <p class="text-gray-600 text-base">Select your favorite product and purchase</p>
+    </div>
+
+    <div class="w-11/12 mx-auto">
+        <div class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6">
+            @for(brand of brandsList;track brand){
+            <img [src]="brand.image" [alt]="brand.name" class="h-[120px]" [title]="brand.name">
+            }
+        </div>
+    </div>
+</div>
 
 @if(isModalOpen){
 <div
@@ -233,7 +248,7 @@
                 </div>
 
                 <div class="my-2">
-                    <button
+                    <button (click)="addToCart(selectedProduct._id)"
                         class="w-full text-center p-2 uppercase bg-green-950 text-white  hover:bg-green-800 transition-all duration-200">
                         <i class="fa-solid fa-basket-shopping mx-2"></i> Add to bag</button>
                 </div>
@@ -243,8 +258,19 @@
                         class="w-full text-center p-2 uppercase bg-gray-200 text-black hover:bg-red-700 hover:text-white transition-all duration-200">
                         <i class="fa-regular fa-heart mx-2"></i> wishlist</button>
                 </div>
+
+
+                <div class="my-2">
+                    <button routerLink="/product/details/{{selectedProduct._id}}"
+                        class="w-full text-center p-2 uppercase bg-gray-200 text-black hover:bg-gray-400 hover:text-white transition-all duration-200">
+                        <i class="fa-solid fa-circle-info mx-2"></i> More</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+}
+
+@if(isLoading){
+    <app-loading></app-loading>
 }
