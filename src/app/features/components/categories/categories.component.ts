@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { categoryI } from '../../shared/interfaces/category.interface';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Subscription } from 'rxjs';
-import { EcommerceService } from '../../shared/services/ecommerce/ecommerce.service';
 import { RouterLink } from '@angular/router';
+import { categoryI } from '../../../shared/interfaces/category.interface';
+import { EcommerceService } from '../../../shared/services/ecommerce/ecommerce.service';
 
 @Component({
   selector: 'app-categories',

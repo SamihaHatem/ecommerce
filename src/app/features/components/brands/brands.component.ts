@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { EcommerceService } from '../../shared/services/ecommerce/ecommerce.service';
-import { brandsI } from '../../shared/interfaces/brands.interface';
+import { EcommerceService } from '../../../shared/services/ecommerce/ecommerce.service';
+import { brandsI } from '../../../shared/interfaces/brands.interface';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { productI } from '../../shared/interfaces/product.interfcae';
 import { Subscription } from 'rxjs';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { EcommerceService } from '../../shared/services/ecommerce/ecommerce.service';
+import { productI } from '../../../shared/interfaces/product.interfcae';
+import { EcommerceService } from '../../../shared/services/ecommerce/ecommerce.service';
 
 @Component({
   selector: 'app-products',

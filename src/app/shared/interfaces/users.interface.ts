@@ -3,5 +3,8 @@ export interface usersI {
     name?: string,
     email?: string,
     createdAt?: Date,
-    token?: string
+    token?: string,
+    password?: string,
+    rePassword?: string,
+    phone?: string
 }

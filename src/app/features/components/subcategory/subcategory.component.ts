@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { EcommerceService } from '../../shared/services/ecommerce/ecommerce.service';
+import { EcommerceService } from '../../../shared/services/ecommerce/ecommerce.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { subCategoryI } from '../../shared/interfaces/subcategory.interface';
+import { subCategoryI } from '../../../shared/interfaces/subcategory.interface';
 
 @Component({
   selector: 'app-subcategory',

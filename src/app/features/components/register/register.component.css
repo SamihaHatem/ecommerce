@@ -1,0 +1,8 @@
+.main-img {
+    /* background-image: url(/images/auth-bg.webp); */
+    background-image: url('/images/bg-root.png');
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid rgb(88, 0, 0);
+}

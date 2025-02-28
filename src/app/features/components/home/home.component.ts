@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { EcommerceService } from '../../shared/services/ecommerce/ecommerce.service';
-import { categoryI } from '../../shared/interfaces/category.interface';
+import { EcommerceService } from '../../../shared/services/ecommerce/ecommerce.service';
+import { categoryI } from '../../../shared/interfaces/category.interface';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { productI } from '../../shared/interfaces/product.interfcae';
+import { productI } from '../../../shared/interfaces/product.interfcae';
 
 @Component({
   selector: 'app-home',
