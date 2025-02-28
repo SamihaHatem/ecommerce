@@ -73,14 +73,24 @@
             </div>
 
             <div class="my-2">
-                <button
+                @if(wishList.includes(selectedProduct._id)){
+                <button (click)="removeFromWishlist(selectedProduct._id)"
+                    class="w-full text-center p-2 uppercase bg-gray-200 text-black hover:bg-red-700 hover:text-white transition-all duration-200">
+                    <i class="fa-regular fa-heart mx-2"></i> Remove from wishlist</button>
+                }
+                @else {
+                <button (click)="addtowishlist(selectedProduct._id)"
                     class="w-full text-center p-2 uppercase bg-gray-200 text-black hover:bg-red-700 hover:text-white transition-all duration-200">
                     <i class="fa-regular fa-heart mx-2"></i> wishlist</button>
+                }
+
             </div>
-
-
 
         </div>
     </div>
 </div>
+}
+
+@if(isLoading){
+<app-loading></app-loading>
 }

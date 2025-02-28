@@ -3,12 +3,12 @@ import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { AuthService } from '../../../shared/services/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -25,15 +25,17 @@ export class RegisterComponent {
     event.target.value = value.replace(/[^0-9]/g, '');
   }
 
+   myPlatformID = inject(PLATFORM_ID)
+
+
   register(form: any) {
     this.errMsg = ''
     this.isLoading = true;
     this.authServices.registerUser(form.value).subscribe((response: any) => {
       console.log(response)
       if (response.message == 'success') {
-        const myPlatformID = inject(PLATFORM_ID)
 
-        if (isPlatformBrowser(myPlatformID)) {
+        if (isPlatformBrowser(this.myPlatformID)) {
           localStorage.setItem('eUser', JSON.stringify(response.user))
           localStorage.setItem('eToken', response.token)
         }

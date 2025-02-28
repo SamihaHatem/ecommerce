@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { LoadingComponent } from "../../../shared/components/loading/loading.component";
 import { CartService } from '../../../shared/services/cart/cart.service';
 import Swal from 'sweetalert2';
+import { WishlistService } from '../../../shared/services/wishlist/wishlist.service';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +19,7 @@ import Swal from 'sweetalert2';
 export class ProductsComponent implements OnInit, OnDestroy {
 
 
-  constructor(private ecommerceService: EcommerceService, private cartServices: CartService) { }
+  constructor(private ecommerceService: EcommerceService, private cartServices: CartService, private wishlistServices: WishlistService) { }
 
   isModalOpen: boolean = false;
   isLoading: boolean = true
@@ -92,8 +93,59 @@ export class ProductsComponent implements OnInit, OnDestroy {
     })
   }
 
+
+  wishList: string[] = []
+  addtowishlist(id: string) {
+    this.isLoading = true;
+    this.wishlistServices.addProductToWishlist(id).subscribe((response: any) => {
+      console.log(response)
+      Swal.fire({
+        title: response.message,
+        icon: 'success'
+      }).then(() => {
+        this.isModalOpen = false
+        this.wishList = response.data
+      })
+      this.isLoading = false
+    }, (err: any) => {
+      console.log(err)
+      this.isLoading = false
+
+    })
+  }
+
+  removeFromWishlist(id: string) {
+    this.isLoading = true;
+    this.wishlistServices.removeProductFromWishlist(id).subscribe((response: any) => {
+      console.log(response)
+      Swal.fire({
+        title: response.message,
+        icon: 'success'
+      }).then(() => {
+        this.isModalOpen = false
+        this.wishList = response.data
+      })
+      this.isLoading = false
+    }, (err: any) => {
+      console.log(err)
+      this.isLoading = false
+
+    })
+  }
+
+  getWishlist() {
+    this.wishlistServices.getUserWishlist().subscribe((response: any) => {
+      console.log("getUserWishlist: ", response)
+      this.wishList = response.data.map((p: any) => p._id)
+      console.log(this.wishList)
+    }, (err: any) => {
+      console.log(err)
+    })
+  }
+
   ngOnInit(): void {
     this.getProducts();
+    this.getWishlist();
   }
 
   ngOnDestroy(): void {

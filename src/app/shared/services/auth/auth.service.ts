@@ -11,7 +11,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-
   registerUser(user: { name: string, email: string, password: string, rePassword: string, phone: string }): Observable<any> {
     return this.http.post(environment.basurl + '/auth/signup', user)
   }
@@ -21,11 +20,11 @@ export class AuthService {
   }
 
   forgetPassword(email: string): Observable<any> {
-    return this.http.post(environment.basurl + '/auth/forgotPasswords', { email })
+    return this.http.post(environment.basurl + '/auth/forgotPasswords', email)
   }
 
-  verifyResetCode(resetCode: string): Observable<any> {
-    return this.http.post(environment.basurl + '/auth/verifyResetCode', { resetCode })
+  verifyResetCode(resetCode: any): Observable<any> {
+    return this.http.post(environment.basurl + '/auth/verifyResetCode', resetCode)
   }
 
   // token

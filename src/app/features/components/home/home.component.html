@@ -104,9 +104,14 @@
                     <div class="absolute bottom-0 w-full text-center bg-white/70 py-2">
                         <i (click)="openModal(product)"
                             class="fa-solid fa-magnifying-glass-plus mx-2 text-gray-600 hover:text-blue-800 cursor-pointer transition-all duration-300"></i>
-                        <i
-                            class="fa-solid fa-heart mx-2 text-gray-600 hover:text-red-500 cursor-pointer transition-all duration-300"></i>
-                        <i
+                        @if(wishList.includes(product._id)){
+                        <i (click)="removeFromWishlist(product._id)"
+                            class="fa-solid fa-heart mx-2 text-red-600 hover:text-red-500 cursor-pointer transition-all duration-300"></i>
+                        }
+                        @else { <i (click)="addtowishlist(product._id)"
+                            class="fa-solid fa-heart mx-2 text-gray-600 hover:text-red-500 cursor-pointer transition-all duration-300"></i>}
+
+                        <i (click)="addToCart(product._id)"
                             class="fa-solid fa-cart-shopping mx-2 text-gray-600 hover:text-green-600 cursor-pointer transition-all duration-300"></i>
                     </div>
                 </div>
@@ -254,10 +259,20 @@
                 </div>
 
                 <div class="my-2">
-                    <button
+                    @if(wishList.includes(selectedProduct._id)){
+                    <button (click)="removeFromWishlist(selectedProduct._id)"
+                        class="w-full text-center p-2 uppercase bg-gray-200 text-black hover:bg-red-700 hover:text-white transition-all duration-200">
+                        <i class="fa-regular fa-heart mx-2"></i> Remove from wishlis</button>
+                    }
+                    
+                    @else{
+                    <button (click)="addtowishlist(selectedProduct._id)"
                         class="w-full text-center p-2 uppercase bg-gray-200 text-black hover:bg-red-700 hover:text-white transition-all duration-200">
                         <i class="fa-regular fa-heart mx-2"></i> wishlist</button>
+                    }
+
                 </div>
+
 
 
                 <div class="my-2">
@@ -272,5 +287,5 @@
 }
 
 @if(isLoading){
-    <app-loading></app-loading>
+<app-loading></app-loading>
 }

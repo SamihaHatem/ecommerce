@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class OrdersService {
 
-  token = localStorage.getItem('eToken')!
   constructor(private http: HttpClient) { }
 
   cashPayment(cartId: string, reqBody: { shippingAddress: { details: string, phone: string, city: string } }): Observable<any> {

@@ -16,11 +16,21 @@ export class NavbarComponent implements OnInit {
   private readonly router = inject(Router)
   private readonly myPlatformID = inject(PLATFORM_ID)
   isLoggedIn: boolean = false
-  constructor(private flowbiteService: FlowbiteService) {
-  }
+  constructor(private flowbiteService: FlowbiteService) { }
 
   toggleMood() {
-    (this.mood == 'light') ? this.mood = 'dark' : this.mood = 'light';
+    if (this.mood == 'light') {
+      this.mood = 'dark'
+      document.documentElement.classList.add('dark')
+      if (isPlatformBrowser(this.myPlatformID))
+        localStorage.setItem('theme', 'dark')
+    }
+    else {
+      this.mood = 'light';
+      document.documentElement.classList.remove('dark')
+      if (isPlatformBrowser(this.myPlatformID))
+        localStorage.setItem('theme', 'light')
+    }
   }
 
   logout() {
@@ -29,6 +39,8 @@ export class NavbarComponent implements OnInit {
     }
     this.router.navigate(['login'])
   }
+
+
 
   ngOnInit(): void {
     this.flowbiteService.loadFlowbite(flowbite => { });

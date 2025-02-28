@@ -12,6 +12,8 @@ export const routes: Routes = [
         children: [
             { path: 'login', loadComponent: () => import('./features/components/login/login.component').then((c) => c.LoginComponent), title: 'Login' },
             { path: 'register', loadComponent: () => import('./features/components/register/register.component').then((c) => c.RegisterComponent), title: 'Register' },
+            { path: 'forgot', loadComponent: () => import('./features/components/forgotpassword/forgotpassword.component').then((c) => c.ForgotpasswordComponent), title: 'Forgot Password' },
+            { path: 'resetPassword', loadComponent: () => import('./features/components/reset-password/reset-password.component').then((c) => c.ResetPasswordComponent), title: 'Reset Password' },
         ]
     },
     {
